@@ -33,6 +33,12 @@ fn if_collatz_holds(arr: [u64; 10]) -> [bool; 10] {
     return result;
 }
 
+fn tuple_return(x: u64) -> (u64, [u64; 10], [bool; 10]) {
+    let arr = power_array(x);
+    let res = if_collatz_holds(arr);
+    return (x, arr, res);
+}
+
 fn main() {
     let result = loop{
         println!("Enter a number (0 to quit):");
@@ -63,7 +69,7 @@ fn main() {
 
         write!(file, "{:?}", res).expect("Could not write to file");
     };
-
+    tuple_return(1);
     if result{
         println!("Ended cuz of an error");
     }
