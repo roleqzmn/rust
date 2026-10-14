@@ -40,7 +40,7 @@ fn tuple_return(x: u64) -> (u64, [u64; 10], [bool; 10]) {
 }
 
 fn main() {
-    let result = loop{
+    let result = 'outer: loop{
         println!("Enter a number (0 to quit):");
         let mut input = String::new();
 
@@ -68,13 +68,22 @@ fn main() {
         let mut file = File::create("xyz.txt").unwrap();
 
         write!(file, "{:?}", res).expect("Could not write to file");
+        for i in 0..10 {
+            if !res[i] {
+                break 'outer true;
+            }
+        }
     };
-    tuple_return(1);
     if result{
         println!("Ended cuz of an error");
     }
     else{
         println!("Ended cuz u wanted");
     }
+
+    let (base, powers, collatz_checks) = tuple_return(2);
+
+    
+
     return;
 }
